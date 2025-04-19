@@ -1,117 +1,137 @@
-# Azure Identity Governance
+**Azure Identity Governance Implementation**
 
-This project demonstrates how to implement **Microsoft Azure Identity Governance** step-by-step using **Access Packages, Conditional Access, PIM, and Access Reviews**. It’s a practical showcase with real configurations, screenshots, and exported audit data—ideal for anyone looking to understand or manage enterprise identity governance in Azure.
-
----
-
-## 📌 Objectives
-- Set up secure **access control** with Azure Identity Governance.
-- Implement **Conditional Access** and **Privileged Identity Management (PIM)**.
-- Run **Access Reviews** and automate lifecycle cleanup.
-- Export **logs for auditing** and create a Power BI-ready dataset.
+This project demonstrates an end-to-end implementation of **Microsoft Entra ID Governance (formerly Azure AD)**, showcasing how to configure access controls, monitor identities, enforce least privilege, and visualize audits in an enterprise cloud environment.
 
 ---
 
-## 🛠️ Tools Used
-- Microsoft Azure Portal
-- Entra ID Governance
-- Power BI (for visualizing exported logs)
-- GitHub (project documentation)
+### 🔖 Objectives
+- Establish enterprise-grade identity access control using Microsoft Entra ID.
+- Configure **Access Packages** for HR, Finance, and IT with time-bound permissions.
+- Enforce secure access through **Conditional Access Policies** (e.g., MFA).
+- Manage elevated permissions using **Privileged Identity Management (PIM)**.
+- Conduct recurring **Access Reviews** with auto-removal for stale access.
+- Collect audit and sign-in logs, then visualize insights via **Power BI**.
 
 ---
 
-## 🔐 Step 1: Create Users and Groups
-Created the following sample users:
+### 🛠️ Tools & Services Used
+- **Microsoft Azure Portal**  
+- **Entra ID Governance**  
+  - Access Packages  
+  - Conditional Access  
+  - PIM (Privileged Identity Management)  
+  - Access Reviews  
+- **Microsoft Authenticator (MFA)**
+- **Power BI Desktop** (data visualization)
+- **GitHub** (project repository, documentation)
+- **CSV Export Tools** (Azure Portal exports)
+
+---
+
+### 🔐 Step 1: User + Group Creation
+Provisioned 5 users for role simulation:
 - Alice HR
 - Bob Finance
 - Carol IT
-- Dave Cont
+- Dave Contractor
 - Erin Manager
 
-And added to:
-- `HR-Access`  
-- `Finance-Access`  
-- `IT-Access`  
+Created 3 groups:
+- HR-Access
+- Finance-Access
+- IT-Access
 
-📸 *[Screenshot: `images/step1_users.png`](images/step1_users.png)*  
-📸 *[Screenshot: `images/step1_groups.png`](images/step1_groups.png)*
-
----
-
-## 🎫 Step 2: Configure Access Packages
-- Built 3 Access Packages to align with business roles:
-  - **HR Tools**
-  - **Finance Apps**
-  - **IT Admin JIT Access**
-- Configured request policies, approval flows, and life cycles.
-
-📸 *[Screenshot: `images/step2_access_packages.png`](images/step2_access_packages.png)*
+**📸 Screenshots:**
+- Users: `/images/step1_users.png`
+- Groups: `/images/step1_groups.png`
 
 ---
 
-## 🚧 Step 3: Conditional Access & PIM
-- Created Conditional Access policies:
-  - `Require MFA for High Risk Sign-ins`
-  - `Block Legacy Authentication`
-- Set up PIM for the **Global Reader** role.
-- Assigned **Carol IT** as eligible and activated for 1 hour.
+### 🎫 Step 2: Access Packages Setup
+Built 3 Access Packages:
+- **HR Tools**
+- **Finance Apps**
+- **IT Admin JIT Access**
 
-📸 *[Screenshot: `images/step3_mfa_policy.png`](images/step3_mfa_policy.png)*  
-📸 *[Screenshot: `images/step3_pim_activation.png`](images/step3_pim_activation.png)*
+Configured approval workflows, access expiration, lifecycle policies.
 
----
-
-## 🔁 Step 4: Access Reviews
-- Set up recurring access reviews for:
-  - `HR Group` (Package 1)
-  - `Finance Group` (Package 2)
-- Reviewer: **Erin Manager**
-- Auto-remove users if no response in 30 days
-
-📸 *[Screenshot: `images/step4_review_config.png`](images/step4_review_config.png)*  
-📸 *[Screenshot: `images/step4_decision_log.png`](images/step4_decision_log.png)*
+**📸 Screenshot:** `/images/step2_access_packages.png`
 
 ---
 
-## 📁 Step 5: Audit Logs & Export
-Exported and included:
-- Access Review Logs  
-- Group Membership Logs  
-- Sign-in Logs  
+### ⚠️ Step 3: Conditional Access & PIM
+**Policies Created:**
+- `Require MFA for High Risk Sign-ins`
+- `Block Legacy Authentication`
 
-📁 *See `data/` folder for .csv files*
+**PIM Configuration:**
+- Assigned `Global Reader` role to Carol IT.
+- Activation time: 1 hour
 
----
-
-## 📊 Step 6: Power BI Dashboard *(Optional)*
-Created visuals for:
-- 📈 Review Approvals vs Denials (Bar Chart)
-- 📉 Sign-ins Over Time (Line Graph)
-- 🔄 Group Membership Changes (Matrix)
-
-📸 *[Screenshot: `images/step6_powerbi_dashboard.png`](images/step6_powerbi_dashboard.png)*
+**📸 Screenshots:**
+- MFA Policy: `/images/step3_mfa_policy.png`
+- PIM Activation: `/images/step3_pim_activation.png`
 
 ---
 
-## 🧠 Key Learnings
-- How Azure Identity Governance tools secure enterprise identity management.
-- Automated lifecycle management and least privilege enforcement.
-- Integration between access policies, approvals, and monitoring.
+### 🔄 Step 4: Access Reviews
+**Setup:**
+- Reviewer: Erin Manager
+- HR & Finance groups
+- Frequency: Weekly
+- Auto-remove if no action in 30 days
+
+**📸 Screenshots:**
+- Configuration: `/images/step4_review_config.png`
+- Decision History: `/images/step4_decision_log.png`
 
 ---
 
-## 🔄 Reproduce This Project
-1. Spin up a Microsoft Entra ID test tenant.
-2. Follow each step using the Azure Portal.
-3. Export logs under *Azure AD > Audit Logs / Sign-in logs / Access Reviews*
-4. Import to Power BI or Excel for reporting.
+### 📁 Step 5: Log Export & Audits
+Exported logs from Azure:
+- `Access Reviews`  
+- `Group Membership`  
+- `Sign-in Activity`
+
+Stored in `/data/` as `.csv` files.
 
 ---
 
-## 💬 Feedback / Suggestions
-Open an issue or message me on GitHub!
+### 📊 Step 6: Power BI Dashboard
+Loaded data into Power BI Desktop and created:
+- **Bar Chart**: Review Approvals vs Denials
+- **Line Graph**: Sign-ins over time
+- **Matrix**: Membership churn by user/role
+
+**📸 Screenshot:** `/images/step6_powerbi_dashboard.png`
 
 ---
 
-> 🧠 **Tip for Recruiters:**  
-This project showcases hands-on governance implementation and security configuration in a real Azure environment—demonstrating infrastructure readiness, compliance mindset, and cloud access control best practices.
+### 🧠 Key Takeaways
+- Mastery of Azure Identity Governance and lifecycle automation
+- Secure access enforcement with MFA + Conditional Access
+- Role-based and just-in-time elevation using PIM
+- Real-world access auditing and review strategy
+- Audit compliance readiness with Power BI integration
+
+---
+
+### 🔄 Reproduce This Project
+1. Spin up a free Entra ID tenant in the Azure Portal
+2. Add users, groups, and packages as shown
+3. Export logs from:
+   - Azure AD > Audit Logs
+   - Azure AD > Sign-in Logs
+   - Identity Governance > Access Reviews
+4. Visualize using Power BI Desktop (`Get Data > CSV`)
+
+---
+
+### 📢 Recruiter Tip
+This project mimics a real enterprise governance model in the cloud—perfect for roles in **Cloud Security**, **Identity & Access Management (IAM)**, or **Compliance Engineering**. It proves hands-on experience with **Microsoft Entra ID**, **zero trust**, and **lifecycle automation**.
+
+---
+
+### 💬 Feedback or Questions?
+Open an issue or connect with me on GitHub. Always improving.
+
