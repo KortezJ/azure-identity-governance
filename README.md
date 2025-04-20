@@ -1,5 +1,8 @@
 **Azure Identity Governance Implementation**
 
+![Azure Identity Governance Flow Diagram](images/azure_identity_governance_diagram.png)
+
+
 This project demonstrates an end-to-end implementation of **Microsoft Entra ID Governance (formerly Azure AD)**, showcasing how to configure access controls, monitor identities, enforce least privilege, and visualize audits in an enterprise cloud environment.
 
 ---
